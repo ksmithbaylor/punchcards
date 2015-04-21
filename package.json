@@ -17,5 +17,7 @@
   },
   "homepage": "https://github.com/ksmithbaylor/punchcards",
   "dependencies": {
+    "finalhandler": "^0.3.4",
+    "router": "^1.0.0"
   }
 }
