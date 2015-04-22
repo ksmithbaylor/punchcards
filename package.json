@@ -18,6 +18,7 @@
   "homepage": "https://github.com/ksmithbaylor/punchcards",
   "dependencies": {
     "finalhandler": "^0.3.4",
+    "lodash": "^3.7.0",
     "router": "^1.0.0"
   }
 }
