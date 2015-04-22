@@ -9,11 +9,10 @@ var options = {
   }
 };
 
-module.exports = co.wrap(function*(username, cb) {
-  var result = yield request(gh('zen'), options);
+var base = 'https://api.github.com';
+
+module.exports = co.wrap(function*(username) {
+  var reposUrl = base + '/users/' + username + '/repos';
+  var result = yield request(reposUrl, options);
   return username + ' says ' + result.body;
 });
-
-function gh(str) {
-  return 'https://api.github.com/' + str;
-}
