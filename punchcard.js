@@ -10,6 +10,10 @@ var options = {
 };
 
 module.exports = co.wrap(function*(username, cb) {
-  var result = yield request('https://api.github.com/zen', options);
+  var result = yield request(gh('zen'), options);
   return username + ' says ' + result.body;
 });
+
+function gh(str) {
+  return 'https://api.github.com/' + str;
+}
