@@ -13,6 +13,7 @@ function static(path, file, type) {
 
 static('/', 'index.html', 'text/html');
 static('/d3.min.js', 'node_modules/d3/d3.min.js', 'text/javascript');
+static('/chart.js', 'chart.js', 'text/javascript');
 
 router.get('/users/:user/', (req, res) => {
   punchcard(req.params.user).then(result => res.end(result));
