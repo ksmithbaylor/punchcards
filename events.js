@@ -1,6 +1,7 @@
 var userField = document.getElementById('userField');
 var submitButton = document.getElementById('submitButton');
 var fake = document.getElementById('fake');
+var graph = document.getElementById('graph');
 
 fake.addEventListener('click', function () {
   var url = '/fake';
@@ -14,5 +15,5 @@ submitButton.addEventListener('click', function () {
 
 function handleResponse(err, data) {
   if (err) throw err;
-  console.log(data);
+  makeGraph(graph, data);
 }
