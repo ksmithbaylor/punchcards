@@ -4,7 +4,8 @@
   "description": "Interface to create aggregate punchcards for a GitHub user",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build-client": "babel -w client --ignore 'client/*.swp' --out-file dist/app.js",
+    "run-server": "TOKEN=$(cat token) nodemon --exec babel-node -- server"
   },
   "repository": {
     "type": "git",
@@ -20,8 +21,10 @@
     "co": "^4.5.2",
     "co-request": "^0.2.1",
     "d3": "^3.5.5",
-    "finalhandler": "^0.3.4",
-    "lodash": "^3.7.0",
-    "router": "^1.0.0"
+    "express": "^4.12.3",
+    "lodash": "^3.7.0"
+  },
+  "devDependencies": {
+    "babel": "^5.1.11"
   }
 }
