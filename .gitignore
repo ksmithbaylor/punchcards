@@ -5,3 +5,4 @@ token
 dist/*
 !dist/index.html
 !dist/fake
+!dist/styles.css
