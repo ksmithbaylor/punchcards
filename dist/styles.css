@@ -5,3 +5,9 @@ body {
 .day-name {
     fill: #555;
 }
+
+line {
+  stroke-width: 1;
+  stroke: #eee;
+  shape-rendering: crispedges;
+}

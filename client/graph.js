@@ -19,6 +19,7 @@ function makeGraph(data) {
   const palette = makePalette('#graph', graphWidth, graphHeight);
   const dayRows = makeDayRows(palette, dayNames);
   const dayLabels = makeDayLabels(dayRows);
+  const lowerLines = makeLowerLines(dayRows);
   const hourLabels = makeHourLabels(palette.append('g'));
 }
 
@@ -36,6 +37,14 @@ function makeDayLabels(sel) {
   return sel.append('text')
     .attr('class', 'day-name')
     .text(d => d);
+}
+
+function makeLowerLines(sel) {
+  return sel.append('line')
+    .attr({
+      x1: 0, x2: graphWidth,
+      y1: yBuffer, y2: yBuffer
+    });
 }
 
 function makeHourLabels(elm) {
