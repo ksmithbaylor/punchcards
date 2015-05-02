@@ -1,20 +1,54 @@
 const graphHeight = 520;
 const graphWidth = 920;
 
+const xBuffer = 110;
+const hoursWidth = graphWidth - xBuffer;
+const hourWidth = hoursWidth / 24;
+
+const yBuffer = 35;
+const daysHeight = graphHeight - yBuffer;
+const dayHeight = daysHeight / 7;
+
 const append = b => a => a + b;
-const hours = ch => [12].concat(d3.range(1, 12)).map(append(ch));
-const allHours = hours('a').concat(hours('p'));
+const makeHourNames = ch => [12].concat(d3.range(1, 12)).map(append(ch));
+const hourNames = makeHourNames('a').concat(makeHourNames('p'));
 
-const days = [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday',
-               'Thursday', 'Friday', 'Saturday' ];
+const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
-const graph = d3.select('#graph')
-                .append('svg')
-                .attr('width', graphWidth)
-                .attr('height', graphHeight);
+function makeGraph(data) {
+  const palette = makePalette('#graph', graphWidth, graphHeight);
+  const dayRows = makeDayRows(palette, dayNames);
+  const hourLabels = makeHourLabels(palette.append('g'));
+}
 
-function makeGraph(graph, data) {
-  console.log(allHours);
-  console.log(days);
-  console.log(JSON.stringify(data));
+function makePalette(sel, width, height) {
+  return d3.select(sel).append('svg').attr({width, height});
+}
+
+function makeDayRows(elm, data) {
+  return construct(elm, data, 'g')
+    .attr('class', 'day-row')
+    .attr('transform', (d, i) => translate(0, i * dayHeight + yBuffer))
+    .append('text')
+    .attr('class', 'day-name')
+    .text(d => d);
+}
+
+function makeHourLabels(elm) {
+  return construct(elm, hourNames, 'text')
+    .attr('class', 'hour-label')
+    .attr('text-anchor', 'middle')
+    .attr('transform', (d, i) => translate(i * hourWidth + xBuffer,
+                                           graphHeight - yBuffer / 2))
+    .text(d => d);
+}
+
+// Utilities
+
+function construct(sel, data, tag) {
+  return sel.selectAll(tag).data(data).enter().append(tag);
+}
+
+function translate(x, y) {
+  return 'translate(' + x + ',' + y + ')';
 }
