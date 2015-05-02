@@ -18,6 +18,7 @@ const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','S
 function makeGraph(data) {
   const palette = makePalette('#graph', graphWidth, graphHeight);
   const dayRows = makeDayRows(palette, dayNames);
+  const dayLabels = makeDayLabels(dayRows);
   const hourLabels = makeHourLabels(palette.append('g'));
 }
 
@@ -28,8 +29,11 @@ function makePalette(sel, width, height) {
 function makeDayRows(elm, data) {
   return construct(elm, data, 'g')
     .attr('class', 'day-row')
-    .attr('transform', (d, i) => translate(0, i * dayHeight + yBuffer))
-    .append('text')
+    .attr('transform', (d, i) => translate(0, i * dayHeight + yBuffer));
+}
+
+function makeDayLabels(sel) {
+  return sel.append('text')
     .attr('class', 'day-name')
     .text(d => d);
 }
