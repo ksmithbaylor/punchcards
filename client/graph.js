@@ -9,6 +9,8 @@ const yBuffer = 35;
 const daysHeight = graphHeight - yBuffer;
 const dayHeight = daysHeight / 7;
 
+const lineBase = 30;
+
 const append = b => a => a + b;
 const makeHourNames = ch => [12].concat(d3.range(1, 12)).map(append(ch));
 const hourNames = makeHourNames('a').concat(makeHourNames('p'));
@@ -43,7 +45,7 @@ function makeLowerLines(sel) {
   return sel.append('line')
     .attr({
       x1: 0, x2: graphWidth,
-      y1: 30, y2: 30
+      y1: lineBase, y2: lineBase
     });
 }
 
