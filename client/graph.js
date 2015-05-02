@@ -35,7 +35,7 @@ function makeDayRows(elm, data) {
 
 function makeDayLabels(sel) {
   return sel.append('text')
-    .attr('class', 'day-name')
+    .attr('class', 'day-label')
     .text(d => d);
 }
 
@@ -43,16 +43,15 @@ function makeLowerLines(sel) {
   return sel.append('line')
     .attr({
       x1: 0, x2: graphWidth,
-      y1: yBuffer, y2: yBuffer
+      y1: 30, y2: 30
     });
 }
 
 function makeHourLabels(elm) {
   return construct(elm, hourNames, 'text')
     .attr('class', 'hour-label')
-    .attr('text-anchor', 'middle')
-    .attr('transform', (d, i) => translate(i * hourWidth + xBuffer,
-                                           graphHeight - yBuffer / 2))
+    .attr('text-anchor', 'bottom')
+    .attr('transform', (d, i) => translate(i * hourWidth + xBuffer, graphHeight - 5))
     .text(d => d);
 }
 
