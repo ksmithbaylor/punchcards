@@ -19,14 +19,15 @@ const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','S
 d3.json('/fake', handleResponse);
 
 function makeGraph(data) {
-  const dataByDay = _.zip(dayNames, _.chunk(data, 24));
+  const dataPoints = _.pluck(data, 2);
+  const dataByDay = _.zip(dayNames, _.chunk(dataPoints, 24));
   const palette = makePalette('#graph', graphWidth, graphHeight);
   const dayRows = makeDayRows(palette, dataByDay);
   const dayLabels = makeDayLabels(dayRows);
   const lowerLines = makeLowerLines(dayRows);
   const hours = makeHours(dayRows);
   const ticks = makeTicks(hours);
-  const circles = makeCircles(hours);
+  const circles = makeCircles(hours, dataPoints);
   const hourLabels = makeHourLabels(palette.append('g'));
 }
 
@@ -71,9 +72,13 @@ function makeHourLabels(sel) {
     .text(d => d);
 }
 
-function makeCircles(sel) {
+function makeCircles(sel, data) {
+  const scale = d3.scale.linear()
+    .domain([d3.min(data), d3.max(data)])
+    .range([1, 15]);
+
   return sel.append('circle')
-    .attr('r', 10)
+    .attr('r', d => scale(d))
     .attr('cy', 25);
 }
 
