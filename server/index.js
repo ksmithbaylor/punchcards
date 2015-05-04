@@ -8,6 +8,9 @@ app.use(express.static('dist'));
 app.get('/d3.min.js', (req, res) =>
   res.sendFile('node_modules/d3/d3.min.js', {root: `${__dirname}/..`}));
 
+app.get('/lodash.min.js', (req, res) =>
+  res.sendFile('node_modules/lodash/index.js', {root: `${__dirname}/..`}));
+
 app.get('/punchcard/:user?', (req, res) =>
   punchcard(req.params.user).then(result => res.json(result)));
 
