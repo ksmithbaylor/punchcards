@@ -16,18 +16,21 @@ const hourNames = makeHourNames('a').concat(makeHourNames('p'));
 
 const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
-d3.json('/fake', handleResponse);
-
 function makeGraph(data) {
   const dataPoints = _.pluck(data, 2);
   const dataByDay = _.zip(dayNames, _.chunk(dataPoints, 24));
+
+  d3.select('svg').remove();
   const palette = makePalette('#graph', graphWidth, graphHeight);
+
   const dayRows = makeDayRows(palette, dataByDay);
+
   const dayLabels = makeDayLabels(dayRows);
   const lowerLines = makeLowerLines(dayRows);
   const hours = makeHours(dayRows);
   const ticks = makeTicks(hours);
   const circles = makeCircles(hours, dataPoints);
+
   const hourLabels = makeHourLabels(palette.append('g'));
 }
 
