@@ -17,3 +17,7 @@ line {
   stroke: #eee;
   shape-rendering: crispedges;
 }
+
+circle {
+    fill: #444;
+}

@@ -26,6 +26,7 @@ function makeGraph(data) {
   const lowerLines = makeLowerLines(dayRows);
   const hours = makeHours(dayRows);
   const ticks = makeTicks(hours);
+  const circles = makeCircles(hours);
   const hourLabels = makeHourLabels(palette.append('g'));
 }
 
@@ -68,6 +69,12 @@ function makeHourLabels(sel) {
     .attr('text-anchor', 'middle')
     .attr('transform', (d, i) => translate(i * hourWidth + xBuffer, graphHeight - 20))
     .text(d => d);
+}
+
+function makeCircles(sel) {
+  return sel.append('circle')
+    .attr('r', 10)
+    .attr('cy', 25);
 }
 
 // Utilities
