@@ -23,7 +23,8 @@ const nameToPunchcard = username =>
 
 module.exports = co.wrap(function*(username) {
   const repos = yield usernameToRepos(username);
-  const names = _.pluck(repos, 'name');
+  const nonForks = _.where(repos, {fork: false});
+  const names = _.pluck(nonForks, 'name');
   const stats = yield _.map(names, nameToPunchcard(username));
   const times = _.zip.apply(null, stats);
 
