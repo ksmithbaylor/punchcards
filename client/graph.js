@@ -77,7 +77,7 @@ function makeHourLabels(sel) {
 
 function makeCircles(sel, data) {
   const scale = d3.scale.linear()
-    .domain([d3.min(data), d3.max(data)])
+    .domain([1, d3.max(data)])
     .range([1, 15]);
 
   return sel.append('circle')
